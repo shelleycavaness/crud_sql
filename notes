@@ -1,0 +1,54 @@
+
+1. express sever
+2. docker-compose.yml up     pasted an mysql container 
+then ran docker up in new terminal
+
+3. ran in 3rd terminal docker exec -it 
+`docker exec -it quintin_crud_db_1 /bin/bash`
+then had to enter password for database found in the docker file.
+Then enter `mysql -p`
+or 
+docker exec -it quintin_crud_db_1 "mysql" "-p"
+
+or 
+`mysql -u user -p`
+then inter the password.
+///////////////////////////////////////////////////////////////////////////////////////
+once you have the mysql running you can do the sql commands
+
+/////mysql table////
+Products
+id unique number
+name : strimg
+price : float
+description : long string
+date_created: date format
+updated: date format
+
+////////commands for creating a first table with a model////////////
+CREATE TABLE IF NOT EXISTS products (
+    id int(11) NOT NULL AUTO_INCREMENT,
+    name varchar(50) NOT NULL,
+    creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_date DATETIME ON UPDATE CURRENT_TIMESTAMP,
+    price DECIMAL(10, 2) NOT NULL,
+    description varchar(550) DEFAULT NULL,
+    PRIMARY KEY(id)
+    );
+// remember that most commands end with a semicolon
+show databases;
+use first_db
+//mysql modify column type
+ ALTER TABLE products  MODIFY description varchar(350) DEFAULT NULL;
+ describe products;
+  show tables;
+
+
+INSERT INTO `products` (
+    `name`,`price`,`description`
+    ) 
+    VALUES ('Hofstadter', 88.88,'INSERT data one by one. We will start with Leonard Hofstadter. We will treat the contact number as a numeric data type and not enclose the number in single quotes.'
+    );
+
+INSERT INTO products (name, price, description)
+VALUES ('Bobby', 66.66, "this on will work better because it has double ' quotes
