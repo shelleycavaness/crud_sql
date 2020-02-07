@@ -1,8 +1,13 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+///const productRouter = express.Router();
+// const productRouter = require('./router');
+
+
+/*
 ///////mysql connection //////////
 const mysql = require('mysql')
-
 
 
 ////config data base////
@@ -20,48 +25,28 @@ connection.connect((err) =>{
 
 connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
   if (err) throw err
-
   console.log('row[0].solution ? The solution is: ', rows[0].solution)
 })
-
-// List all users
-// callback(err, users)
-const listProducts = (callback) => {
-  connection.query('SELECT * FROM products', [], (err, rows) =>{
-    if (err)
-      return callback(err);
-
-    return callback(null, rows);
-  });
-};
-
-
-//let myQuerySql = new sql.Request()
 
 connection.end()
 //////////////////////////
 
+productRouter.route('/products').get((req, res)=>{
+  const query = {}
+  if(req.query){
+    req.query
+  }
+  console.log('router testing')
+  res.send('qwertyuiop')
+})
+*/
+
 app.get('/', (req, res) => {
-    console.log("yeah baby! ")
+//    console.log("yeah baby! ")
     res.send('An alligator approaches!');
 });
 
 
-app.get('/products', (req, res, next) =>{
-
-  listProducts((err, rows) => {
-    const  products = [];
-    if (!err) {
-      rows.forEach((row) =>{
-        products.push({ id: row.id, date: row.date, description: row.description });
-      });
-    }
-
-    res.render('products', { products: req.products });
-  });
-
-});
-
-
+//app.use('./products', productRouter);
 
 app.listen(3000, () => console.log('Gator app listening on port 3000!'));
